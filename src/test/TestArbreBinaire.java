@@ -6,11 +6,13 @@ import arbrebinaire.ExpressionArithmetique;
 import arbrebinaire.Multiplication;
 import arbrebinaire.Negation;
 
-public class TestArbreBinaire {
+public class TestArbreBinaire
+{
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         //faire 1+2*3+-4=3
         Addition racine = new Addition(new Addition(new Constante(1),
                 new Multiplication(new Constante(2), new Constante(3))),
@@ -18,8 +20,8 @@ public class TestArbreBinaire {
         ExpressionArithmetique exp = new ExpressionArithmetique(racine);
 
         exp.afficherInFixe();
-        System.out.println("\n calcul valeur: " + exp.calculerValeur());
-        System.out.println("\n calcul hauteur: " + exp.calculerHauteur());
+        System.out.println("Calcul valeur : " + exp.calculerValeur());
+        System.out.println("Calcul hauteur : " + exp.calculerHauteur());
         exp.afficherPostFixe();
 
     }
