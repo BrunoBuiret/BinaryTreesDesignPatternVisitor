@@ -6,23 +6,54 @@ import arbrebinaire.ExpressionArithmetique;
 import arbrebinaire.Multiplication;
 import arbrebinaire.Negation;
 
-public class TestArbreBinaire
+public abstract class TestArbreBinaire
 {
     /**
-     * @param args
+     * Main entry point.
+     * 
+     * @param args The command line arguments.
      */
     public static void main(String[] args)
     {
-        //faire 1+2*3+-4=3
-        Addition racine = new Addition(new Addition(new Constante(1),
-                new Multiplication(new Constante(2), new Constante(3))),
-                new Negation(new Constante(4)));
-        ExpressionArithmetique exp = new ExpressionArithmetique(racine);
+        // Faire 1 + 2 * 3 + (-4) = 3
+        Addition premierCalcul = new Addition(
+            new Addition(
+                new Constante(1),
+                new Multiplication(
+                    new Constante(2),
+                    new Constante(3)
+                )
+            ),
+            new Negation(new Constante(4))
+        );
+        ExpressionArithmetique premiereExpression = new ExpressionArithmetique(premierCalcul);
 
-        exp.afficherInFixe();
-        System.out.println("Calcul valeur : " + exp.calculerValeur());
-        System.out.println("Calcul hauteur : " + exp.calculerHauteur());
-        exp.afficherPostFixe();
+        premiereExpression.afficherInFixe();
+        System.out.println("Calcul valeur : " + premiereExpression.calculerValeur());
+        System.out.println("Calcul hauteur : " + premiereExpression.calculerHauteur());
+        premiereExpression.afficherPostFixe();
+        
+        System.out.println();
 
+        // Faire (1 + 3) * (-(3 * 4)) = -48
+        Multiplication deuxiemeCalcul = new Multiplication(
+            new Negation(
+                new Multiplication(
+                    new Constante(3),
+                    new Constante(4)
+                )
+            ),
+            new Addition(
+                new Constante(1),
+                new Constante(3)
+            )
+        );
+        
+        ExpressionArithmetique deuxiemeExpression = new ExpressionArithmetique(deuxiemeCalcul);
+
+        deuxiemeExpression.afficherInFixe();
+        System.out.println("Calcul valeur : " + deuxiemeExpression.calculerValeur());
+        System.out.println("Calcul hauteur : " + deuxiemeExpression.calculerHauteur());
+        deuxiemeExpression.afficherPostFixe();
     }
 }
