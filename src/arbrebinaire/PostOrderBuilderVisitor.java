@@ -11,7 +11,7 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
      * A string builder to build the post order visit.
      */
     protected StringBuilder visitBuilder;
-    
+
     /**
      * Creates a new post order visitor which will build a string representing the visit.
      */
@@ -19,7 +19,7 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
     {
         this.visitBuilder = new StringBuilder();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -30,6 +30,10 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
         {
             // Only the node itself
             this.visitBuilder.append(node.getValeur()).append(" ");
+        }
+        else
+        {
+            this.visitBuilder.append("?");
         }
     }
 
@@ -48,9 +52,17 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
             {
                 childNode.accept(this);
             }
+            else
+            {
+                this.visitBuilder.append("?");
+            }
 
             // Then, the node itself
             this.visitBuilder.append(node.getOp()).append(" ");
+        }
+        else
+        {
+            this.visitBuilder.append("?");
         }
     }
 
@@ -69,6 +81,10 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
             {
                 leftChildNode.accept(this);
             }
+            else
+            {
+                this.visitBuilder.append("?");
+            }
 
             // Then, the right child node
             Noeud rightChildNode = node.getOpD();
@@ -76,10 +92,18 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
             if(null != rightChildNode)
             {
                 rightChildNode.accept(this);
-            }            
+            }
+            else
+            {
+                this.visitBuilder.append("?");
+            }
 
             // Finally, the node itself
             this.visitBuilder.append(node.getOp()).append(" ");
+        }
+        else
+        {
+            this.visitBuilder.append("?");
         }
     }
 
@@ -98,6 +122,10 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
             {
                 leftChildNode.accept(this);
             }
+            else
+            {
+                this.visitBuilder.append("?");
+            }
 
             // Then, the right child node
             Noeud rightChildNode = node.getOpD();
@@ -105,23 +133,31 @@ public class PostOrderBuilderVisitor implements ArithmeticalExpressionVisitorInt
             if(null != rightChildNode)
             {
                 rightChildNode.accept(this);
-            }            
+            }
+            else
+            {
+                this.visitBuilder.append("?");
+            }
 
             // Finally, the node itself
             this.visitBuilder.append(node.getOp()).append(" ");
         }
+        else
+        {
+            this.visitBuilder.append("?");
+        }
     }
-    
+
     /**
      * Gets the string resulting from a post order visit.
-     * 
+     *
      * @return The post order visit string.
      */
     public String getVisit()
     {
         return this.visitBuilder.toString().trim();
     }
-    
+
     /**
      * Resets the builder for a new visit.
      */
